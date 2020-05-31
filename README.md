@@ -76,3 +76,7 @@ Admite dos parámetros:
     return <Text>Loading</Text>;
   }
 ```
+
+
+
+
