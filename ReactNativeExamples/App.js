@@ -24,7 +24,7 @@ const App: () => React$Node = () => {
 	};
 	return (
 		<View style={styles.container}>
-			<Modal transparent={true} visible={modal}>
+			<Modal transparent={false} visible={modal}>
 				<View style={styles.modalContent}>
 					<Text style={styles.title}>{modalTitle}</Text>
 					<Text style={styles.modalText}>{modalText}</Text>
@@ -44,7 +44,7 @@ const App: () => React$Node = () => {
 const styles = StyleSheet.create({
 	modalContent: {
 		flex: 1,
-		alignItems: 'center',
+		alignItems: 'stretch',
 		justifyContent: 'center',
 		backgroundColor: '#fff',
 		padding: 10
