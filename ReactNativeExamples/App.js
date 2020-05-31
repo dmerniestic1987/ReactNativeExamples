@@ -19,12 +19,15 @@ import {
 
 import FlatListExample from './FlatListExample';
 import SectionListExample from './SectionListExample';
+import FlatListExampleWithApi from './FlatListExampleWithApi';
 
 const App: () => React$Node = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Flat List</Text>
       <FlatListExample />
+      <Text style={styles.title}>Flat List con API</Text>
+      <FlatListExampleWithApi />
       <Text style={styles.title}>Section List</Text>
       <SectionListExample />
     </View>

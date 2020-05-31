@@ -6,96 +6,111 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, FlatList} from 'react-native';
 
 const hardData = [
   {
-    key: 1,
+    id: 1,
     name: 'Luna Lunita',
     state: 1,
   },
   {
-    key: 2,
+    id: 2,
     name: 'La flor más bonita',
     state: 1,
   },
   {
-    key: 3,
+    id: 3,
     name: 'Luna Lunita',
     state: 1,
   },
   {
-    key: 4,
+    id: 4,
     name: 'Brilla en la noche',
     state: 1,
   },
   {
-    key: 5,
+    id: 5,
     name: 'y Brilla de día',
     state: 1,
   },
   {
-    key: 6,
+    id: 6,
     name: 'Robocop',
     state: 1,
   },
   {
-    key: 7,
+    id: 7,
     name: 'Diego Alejandro',
     state: 1,
   },
   {
-    key: 8,
+    id: 8,
     name: 'Nicolás Maximiliano',
     state: 1,
   },
   {
-    key: 9,
+    id: 9,
     name: 'Robocop',
     state: 1,
   },
   {
-    key: 10,
+    id: 10,
     name: 'Diego Alejandro',
     state: 1,
   },
   {
-    key: 12,
+    id: 12,
     name: 'Nicolás Maximiliano',
     state: 1,
   },
   {
-    key: 13,
+    id: 13,
     name: 'Robocop',
     state: 1,
   },
   {
-    key: 14,
+    id: 14,
     name: 'Diego Alejandro',
     state: 1,
   },
   {
-    key: 15,
+    id: 15,
     name: 'Nicolás Maximiliano',
     state: 1,
   },
   {
-    key: 16,
+    id: 16,
     name: 'Robocop',
     state: 1,
   },
 ];
-const FlatListExample: () => React$Node = () => {
+const FlatListExampleWithApi: () => React$Node = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => {
+        setUsers(data);
+        setLoading(false);
+      });
+  }, []);
+  if (loading) {
+    return <Text>Loading</Text>;
+  }
   return (
     <View style={styles.container}>
       <FlatList
-        data={hardData}
+        data={users}
         renderItem={({item}) => (
           <Text style={styles.item}>
-            {item.key} : {item.name}{' '}
+            {item.id} : {item.email}{' '}
           </Text>
         )}
+        keyExtractor={item => String(item.id)}
       />
     </View>
   );
@@ -104,7 +119,7 @@ const FlatListExample: () => React$Node = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ff0',
+    backgroundColor: '#fa0',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -117,4 +132,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FlatListExample;
+export default FlatListExampleWithApi;
