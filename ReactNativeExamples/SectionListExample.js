@@ -7,7 +7,13 @@
  */
 
 import React from 'react';
-import {StyleSheet, View, Text, SectionList} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  SectionList,
+  ImageBackground,
+} from 'react-native';
 
 const sections = [
   {
@@ -77,17 +83,23 @@ const sections = [
 const SectionListExample: () => React$Node = () => {
   return (
     <View style={styles.container}>
-      <SectionList
-        sections={sections}
-        renderItem={({item}) => (
-          <Text style={styles.item}>
-            {item.key} : {item.name}{' '}
-          </Text>
-        )}
-        renderSectionHeader={({section}) => (
-          <Text style={styles.itemHeader}>{section.title}</Text>
-        )}
-      />
+      <ImageBackground
+        source={{
+          uri: 'https://dragon-ball-api.herokuapp.com/images/Vegeta.jpg',
+        }}
+        style={styles.background}>
+        <SectionList
+          sections={sections}
+          renderItem={({item}) => (
+            <Text style={styles.item}>
+              {item.key} : {item.name}{' '}
+            </Text>
+          )}
+          renderSectionHeader={({section}) => (
+            <Text style={styles.itemHeader}>{section.title}</Text>
+          )}
+        />
+      </ImageBackground>
     </View>
   );
 };
@@ -97,6 +109,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ad2a79',
     alignItems: 'stretch',
+    justifyContent: 'center',
+  },
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
     justifyContent: 'center',
   },
   item: {
