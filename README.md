@@ -76,7 +76,38 @@ Admite dos parámetros:
     return <Text>Loading</Text>;
   }
 ```
+# Modales
+Tenemos que importar **Modal** de react-native.
+Usamos el hook **useState** para saber si el modal se debe mostrar o no. 
+```js
+  const [ modal, setModal ] = useState(false);
+```
 
+Luego creamos otra función que servirá para mostrar el modal, y dibujará
+un título y un texto. 
 
+```js
+	const showModal = (title, text) => {
+		setModal(true);
+		setModalTitle(title);
+		setModalText(text);
+	};
+```
+Modal admite al menos 3 props: 
+- animationType: Es el tipo de animación que se va a mostrar el modal. los valores posibles son: __slide__, __fade__ y __none__.
+- transparent: Que puede ser true o false
+- visible: Que es un boolean para mostrarlo o no. Suele estar en el state del componente papá.
+- onRequestClose: Función cuando el usuario solicita cerrar el modal. 
+Hay más propiedades es: [https://reactnative.dev/docs/modal](https://reactnative.dev/docs/modal).
+
+```js
+  <Modal transparent={true} visible={modal}>
+    <View style={styles.modalContent}>
+      <Text style={styles.title}>{modalTitle}</Text>
+      <Text style={styles.modalText}>{modalText}</Text>
+      <Button title="Cerrar" onPress={() => setModal(!modal)} />
+    </View>
+  </Modal>
+```
 
 

@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { StyleSheet, View, Text, SectionList, ImageBackground } from 'react-native';
+import { StyleSheet, View, Text, SectionList, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 
 const sections = [
 	{
@@ -74,7 +74,8 @@ const sections = [
 		]
 	}
 ];
-const SectionListExample: () => React$Node = () => {
+const SectionListExample: () => React$Node = (props) => {
+	const onShowModal = props.onShowModal;
 	return (
 		<View style={styles.container}>
 			<ImageBackground
@@ -87,9 +88,11 @@ const SectionListExample: () => React$Node = () => {
 					<SectionList
 						sections={sections}
 						renderItem={({ item }) => (
-							<Text style={styles.item}>
-								{item.key} : {item.name}{' '}
-							</Text>
+							<TouchableWithoutFeedback onPress={() => onShowModal(String(item.key), item.name)}>
+								<Text style={styles.item}>
+									{item.key} : {item.name}{' '}
+								</Text>
+							</TouchableWithoutFeedback>
 						)}
 						renderSectionHeader={({ section }) => <Text style={styles.itemHeader}>{section.title}</Text>}
 					/>
