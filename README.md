@@ -57,3 +57,22 @@ la respuesta http y con el segundo obtenemos el cuerpo del JSON.
   }
 ```
 
+## ActivityIndicator
+El ActivityIndicator es un spinner que se muestra cuando realizamos alguna llamada
+asincrónica, por ejemplo cuando esperamos la respuesta de una consulta a una api REST.
+Admite dos parámetros:
+- size: Que puede ser **large** o **small**.
+- color: El color en hexa
+```js
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => {
+        setUsers(data);
+        setLoading(false);
+      });
+  }, []);
+  if (loading) {
+    return <Text>Loading</Text>;
+  }
+```
