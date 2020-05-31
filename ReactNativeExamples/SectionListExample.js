@@ -7,7 +7,13 @@
  */
 
 import React from 'react';
-import {StyleSheet, View, Text, SectionList} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  SectionList,
+  ImageBackground,
+} from 'react-native';
 
 const sections = [
   {
@@ -77,17 +83,25 @@ const sections = [
 const SectionListExample: () => React$Node = () => {
   return (
     <View style={styles.container}>
-      <SectionList
-        sections={sections}
-        renderItem={({item}) => (
-          <Text style={styles.item}>
-            {item.key} : {item.name}{' '}
-          </Text>
-        )}
-        renderSectionHeader={({section}) => (
-          <Text style={styles.itemHeader}>{section.title}</Text>
-        )}
-      />
+      <ImageBackground
+        source={{
+          uri: 'https://dragon-ball-api.herokuapp.com/images/Vegeta.jpg',
+        }}
+        style={styles.background}>
+        <View style={styles.overlayBackground}>
+          <SectionList
+            sections={sections}
+            renderItem={({item}) => (
+              <Text style={styles.item}>
+                {item.key} : {item.name}{' '}
+              </Text>
+            )}
+            renderSectionHeader={({section}) => (
+              <Text style={styles.itemHeader}>{section.title}</Text>
+            )}
+          />
+        </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -99,6 +113,14 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center',
   },
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
+  overlayBackground: {
+    backgroundColor: 'rgba(255,255,255,0.5)',
+  },
   item: {
     padding: 10,
     fontSize: 15,
@@ -108,7 +130,7 @@ const styles = StyleSheet.create({
   },
   itemHeader: {
     fontSize: 20,
-    color: '#ff0',
+    color: '#f00',
   },
 });
 

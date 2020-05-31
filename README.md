@@ -76,3 +76,10 @@ Admite dos parámetros:
     return <Text>Loading</Text>;
   }
 ```
+
+# Modales
+Los modales son dialgos que se abren para que el usuario no pierda el contexto. Se
+pueden crear modales que provean o requieran información. 
+
+
+
