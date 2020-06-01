@@ -17,10 +17,12 @@ const App: () => React$Node = () => {
 	const [ modal, setModal ] = useState(false);
 	const [ modalTitle, setModalTitle ] = useState('');
 	const [ modalText, setModalText ] = useState('');
+	const [ countShowModal, setCountShowModal ] = useState(0);
 	const showModal = (title, text) => {
 		setModal(true);
 		setModalTitle(title);
 		setModalText(text);
+		setCountShowModal(countShowModal + 1);
 	};
 	return (
 		<View style={styles.container}>
@@ -28,6 +30,7 @@ const App: () => React$Node = () => {
 				<View style={styles.modalContent}>
 					<Text style={styles.title}>{modalTitle}</Text>
 					<Text style={styles.modalText}>{modalText}</Text>
+					<Text style={styles.modalText}>{'Abiertos: '.concat(String(countShowModal))}</Text>
 					<Button title="Cerrar" onPress={() => setModal(!modal)} />
 				</View>
 			</Modal>
