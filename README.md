@@ -202,3 +202,16 @@ este se instancian muchas funciones, pero puede ser problemático para la perfor
 sino hay que tratar de no usarlos.
 
 [Documetación oficial de Hooks](https://es.reactjs.org/docs/hooks-intro.html)
+
+# Rutas
+En ReactNative hay 4 tipos de rutas: 
+
+- **Stack**: A medida que vamos navegando por diferentes pantallas agregamos nuevos elementos a la pila. Luego cuando volvemos para atrás se van desapilando. Nos permite manejar un historial de navegación. 
+
+- **Tabs**: Son los tabs inferiores o superiores. No maneja una pila, sino que se selecciona alguno. Sólo se puede estar en un ruta a la vez y no se tiene un historial de navegación.
+
+- **Drawer**: Es similar a Tabs, pero de manera verticual en un drawer. Sólo se puede seleccionar una ruta a la vez y no se tiene un historial de navegación. Tiene funciones para abrir y cerrar el drawer. 
+
+- **Switch**: Se puede navegar entre diferentes pantallas sin guardar el estado de la navegación, es decir que no se mantiene el historial. Se suele utilizar para pantallas de inicio de sesión en las que fue exitosa y se va a la ruta de la aplicación principal.
+
+Todas las navegaciones se pueden componer. 
