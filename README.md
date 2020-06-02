@@ -215,3 +215,12 @@ En ReactNative hay 4 tipos de rutas:
 - **Switch**: Se puede navegar entre diferentes pantallas sin guardar el estado de la navegación, es decir que no se mantiene el historial. Se suele utilizar para pantallas de inicio de sesión en las que fue exitosa y se va a la ruta de la aplicación principal.
 
 Todas las navegaciones se pueden componer. 
+
+## react-navigation
+
+Debemos obtener createAppContainer, que guarda el estado de navegación de la aplicación.
+Todos los componentes que estén con createAppContainer van a poder navegar entre si. 
+ 
+```js
+import { createAppContainer } from 'react-navigation'
+```
