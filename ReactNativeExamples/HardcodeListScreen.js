@@ -23,6 +23,8 @@ const HardcodeListScreen: () => React$Node = ({navigation}) => {
     setModalText(text);
     setCountShowModal(countShowModal + 1);
   };
+  const rockAndRolla = navigation.getParam('infectadura', {});
+  console.log(rockAndRolla);
   return (
     <View style={styles.container}>
       <Modal transparent={false} visible={modal}>
