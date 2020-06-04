@@ -1,17 +1,19 @@
 # React Native.
 
-**await** solo se puede utilizar en funciones asincrónicas y se utiliza para 
+**await** solo se utiliza con funciones asincrónicas y sirve para 
 resolve una promesa.
 
 
 # Componentes de Listas
 Se pueden armar listas de items con: 
+
 - **FlatList**: Toda la lista sin secciones. 
 - **SectionList**: Similar al listado de los contactos con un título 
 (La primera letra del contacto).
 
 ## FlatList
 Las flatList aceptan al menos 3 props:
+
 - data: Un array con los datos para mostrar. 
 - renderItem: Es una función que permite renderizar los datos.
 - keyExtractor: Es una función para sacar la Key de la lista. El nombre por 
@@ -28,16 +30,22 @@ default es **key** que es del tipo String.
     keyExtractor={item => String(item.id)}
   />
 ```
+[Documentación oficila de FlatList](https://reactnative.dev/docs/flatlist)
+
 ## SectionList
 Las SectionList aceptan al menos 3 props: 
+
 - sections: Un array de objetos {title: "Titulo", data: []}
 - renderItem: Es una función para renderizar los items. 
 - renderSectionHeader: Para renderizar los títulos que separan a las listas 
 agrupadas.
 
+[Documentación oficial de SectionList](https://reactnative.dev/docs/sectionlist)
+
 ## Consumir datos desde nuestra API. 
 Se usan los hooks: 
-- useState: Para guardar el estado 
+
+- useState: Permite leer y actualizar el estado de un componente. 
 - useEffect: Para traernos los datos desde nuestra api. Utiliza **efectos**.
 
 Un **efecto** es cualquier cosa asincrónica que pueda ocurrir  cuyo resultado no
@@ -65,6 +73,7 @@ la respuesta http y con el segundo obtenemos el cuerpo del JSON.
 El ActivityIndicator es un spinner que se muestra cuando realizamos alguna llamada
 asincrónica, por ejemplo cuando esperamos la respuesta de una consulta a una api REST.
 Admite dos parámetros:
+
 - size: Que puede ser **large** o **small**.
 - color: El color en hexa
 ```js
@@ -77,9 +86,11 @@ Admite dos parámetros:
       });
   }, []);
   if (loading) {
-    return <Text>Loading</Text>;
+    return <ActivityIndicator size="large" color="#000" />;
   }
 ```
+[Documentación oficial de ActivityIndicator](https://reactnative.dev/docs/activityindicator)
+
 # Modales
 Tenemos que importar **Modal** de react-native.
 Usamos el hook **useState** para saber si el modal se debe mostrar o no. 
@@ -98,11 +109,11 @@ un título y un texto.
 	};
 ```
 Modal admite al menos 3 props: 
+
 - animationType: Es el tipo de animación que se va a mostrar el modal. los valores posibles son: __slide__, __fade__ y __none__.
-- transparent: Que puede ser true o false
-- visible: Que es un boolean para mostrarlo o no. Suele estar en el state del componente papá.
-- onRequestClose: Función cuando el usuario solicita cerrar el modal. 
-Hay más propiedades es: [https://reactnative.dev/docs/modal](https://reactnative.dev/docs/modal).
+- transparent: True si el modal es transparente.
+- visible: True si se debe mostrar el modal.
+- onRequestClose: Función que se invoca cuando el usuario quiere cerrar el modal. 
 
 ```js
   <Modal transparent={true} visible={modal}>
@@ -113,6 +124,7 @@ Hay más propiedades es: [https://reactnative.dev/docs/modal](https://reactnativ
     </View>
   </Modal>
 ```
+[Documentación oficial de Modal](https://reactnative.dev/docs/modal).
 
 # Hooks
 Los hooks se utiliza en componentes funcionales, no en clases, por ejemplo: 
@@ -128,20 +140,23 @@ La mayoría de los hooks devuelve un array.
 ## useState
 El hook se utiliza para agregarle estado al componente funcional. Cuando se usa
 devuelve un array con dos componentes:
+
 - El primero es un valor de solo lectura del estado de la variable. 
 - El segundo es una función que permite cambiar dicho estado. 
 
 ```js
 const FlatListExampleWithApi: () => React$Node = (props) => {
-const [ users, setUsers ] = useState([]);
-const [ loading, setLoading ] = useState(true);
+  const [ users, setUsers ] = useState([]);
+  const [ loading, setLoading ] = useState(true);
 ...
+}
 ```
 
 ## useEffect
-Este hook se utiliza para realizar llamadas asincrónicas para leer o escribir recursos (por ejemplo API, archivo, BD, etc). Por lo general se llama cada vez que se renderiza el 
+Este hook se utiliza para realizar llamadas asincrónicas como leer o escribir recursos (por ejemplo API, archivo, BD, etc). Por lo general se llama cada vez que se renderiza el 
 componente.
 El hook admite dos parámetros: 
+
 - Una función con el código a ejecutar.
 - Un arreglo que se actualiza con los datos. Si se pasa vacío se ejecuta una sola vez, 
 si se pasa null, se ejecuta cada vez que se renderiza el componente. 
@@ -173,8 +188,7 @@ useEffect(() => { fetchUsers() }, []);
 ## useReducer
 Permite utilizar funciones reductoras de manera similar a Redux. 
 La idea es manejar un estado inicial de sólo lectura que se puede actualizar
-solamente con una función reductora. El estado se puede actualizar con una función
-**dispatch**.
+solamente con una función reductora y se pueden despachar acciones con **dispatch**.
 
 ## useMemo
 Se utiliza cuando se tiene que hacer un cálculo muy pesado para los componentes, 
@@ -185,4 +199,28 @@ Hay veces que los componentes se debe renderizar muchas veces. Cada vez que ocur
 este se instancian muchas funciones, pero puede ser problemático para la performance. useCallback es similar a useMemo, pero instancia una única función.
 
 **useMemo** y **useCallback** solo se deben utilizar si hay problemas de rendimientos, 
-sino hay que tratar de no usarlos
+sino hay que tratar de no usarlos.
+
+[Documetación oficial de Hooks](https://es.reactjs.org/docs/hooks-intro.html)
+
+# Rutas
+En ReactNative hay 4 tipos de rutas: 
+
+- **Stack**: A medida que vamos navegando por diferentes pantallas agregamos nuevos elementos a la pila. Luego cuando volvemos para atrás se van desapilando. Nos permite manejar un historial de navegación. 
+
+- **Tabs**: Son los tabs inferiores o superiores. No maneja una pila, sino que se selecciona alguno. Sólo se puede estar en un ruta a la vez y no se tiene un historial de navegación.
+
+- **Drawer**: Es similar a Tabs, pero de manera verticual en un drawer. Sólo se puede seleccionar una ruta a la vez y no se tiene un historial de navegación. Tiene funciones para abrir y cerrar el drawer. 
+
+- **Switch**: Se puede navegar entre diferentes pantallas sin guardar el estado de la navegación, es decir que no se mantiene el historial. Se suele utilizar para pantallas de inicio de sesión en las que fue exitosa y se va a la ruta de la aplicación principal.
+
+Todas las navegaciones se pueden componer. 
+
+## react-navigation
+
+Debemos obtener createAppContainer, que guarda el estado de navegación de la aplicación.
+Todos los componentes que estén con createAppContainer van a poder navegar entre si. 
+ 
+```js
+import { createAppContainer } from 'react-navigation'
+```
